@@ -46,3 +46,26 @@ Que abstracciones usar?
 -- Conclusion --
 SDN es el uso de las dos abstracciones del plano de control.
 
+
+Abstracciones del Control Plane.
+  Vista global de la red.
+    - Informacion acerca de la red.
+    - Implementada con el sistema operativo de red, software corriendo en servidores en la red.
+  Modelo de fordwarding
+    - Povee una forma estandar de definir el estado de fordwarding.
+    - Es OpenFlow
+        Especificacion de <header, accion> en las entradas de flujo.
+
+SDN, son capas para el Plano de Control.
+        -----------------------------
+            Programa Controlador
+        Ruteo, Control de Acceso, etc
+        -----------------------------
+          Vista Global de la Red
+        -----------------------------
+          Sistema Operativo de red
+        -----------------------------
+       Modelo de Fordwarding, Switches
+        -----------------------------
+  Empezamos con los switches conectados con cables, construimos el sistema operativo de red que habla con los switches con el modelo de fordwarding. Con la informacion de los switches el sistema opertativo de red contruye la vista global de la red. Luego construimo el programa controlador sobre la vista.
+---------------------------------- 16:11 ---------------------------------------
