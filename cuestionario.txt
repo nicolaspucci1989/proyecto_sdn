@@ -24,7 +24,10 @@ El hardware de forwarding consiste de:
 
 
 3- Como es conceptualmente la arquitectura SDN?
+
 4- Como se realiza la comunicacion entre los componentes logicos de la arquitectura?
+A traves del protocolo OpenFlow.
+
 5- Que ventajas tiene la implementacion de un red SDN?
 6- Que desventajas tiene la implementacion de una red SDN?
 7- Cual es la funcion principal del controlador en una red SDN?
