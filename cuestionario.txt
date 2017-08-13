@@ -33,6 +33,10 @@
 6- Que desventajas tiene la implementacion de una red SDN?
 
 7- Cual es la funcion principal del controlador en una red SDN?
+  Contiene la lógica de control. El controlador comunica las operaciones a realizar en los paquetes que llegan a los switches.
+  Implementa dos interfaces:
+    · Southbound (ej OpenFlow), permite a los switches comunicarse con el controlador.
+    · Northbound, presenta una API programable para el control de la red y aplicaciones y servicios de alto nivel.
 
 8- Cual es la funcion principal de un switch en una red SDN?
 
