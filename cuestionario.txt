@@ -1,4 +1,5 @@
 1- Que implica conceptualmente SDN?
+Desacopla el plano de control del plano de datos.
 La administración de una red es compleja y propenso a errores.
 La evolución de internet no está a la altura de los desafíos actuales
 Las redes tradicionales no escalan con facilidad. No son extensibles
