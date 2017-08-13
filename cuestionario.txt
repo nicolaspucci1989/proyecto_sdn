@@ -1,4 +1,4 @@
-1- Que implica conceptualmente SDN?
+1- Qué implica conceptualmente SDN?
 Desacopla el plano de control del plano de datos.
 La administración de una red es compleja y propenso a errores.
 La evolución de internet no está a la altura de los desafíos actuales
@@ -16,7 +16,11 @@ El hardware de forwarding consiste de:
   2· Un protocolo de capa de transporte que se comunica de forma segura con un controlador con respecto a entradas que no están actualmente presentes en la tabla de flujo.
 
 
-2- Cuales son los componentes logicos de una red SDN?
+2- Cuáles son los componentes logicos de una red SDN?
+  · El controlador SDN.
+  · Las interfaces presentes en el controlador.
+  · La API de red.
+
 
 
 3- Como es conceptualmente la arquitectura SDN?
