@@ -1,0 +1,27 @@
+1- Que implica conceptualmente SDN?
+La administración de una red es compleja y propenso a errores.
+La evolución de internet no está a la altura de los desafíos actuales
+Las redes tradicionales no escalan con facilidad. No son extensibles
+Las redes programables facilitan la evolución, escalan mejor
+En SDN el hardware encargado del forwarding se desacopla de las decisiones de control.
+Hay una migración de la lógica de control, pasa del dispositivo de red ej switch, a un controlador principal de fácil acceso y control
+SDN también provee un conjunto de APIs que simplifica la implementación de servicios de red.
+En SDN la inteligencia de la red está centralizada en controladores basados en software, y los dispositivos de red se convierten en simples dispositivos con la única tarea de hacer el forwarding de paquetes.
+
+La separación del hardware de forwarding de la lógica de control facilita el despliegue de nuevos protocolos y aplicaciones, facilita la visualización de la red y su administración.
+La red se reduce a con conjunto de dispositivos de reenvío (forwarding) y un con controlador de red encargado de tomar las decisiones.
+El hardware de forwarding consiste de:
+  1· Una tabla que contiene entradas de flujo que consisten en reglas de coincidencia  y acciones que se toman en flujos activos.
+  2· Un protocolo de capa de transporte que se comunica de forma segura con un controlador con respecto a entradas que no están actualmente presentes en la tabla de flujo.
+
+
+2- Cuales son los componentes logicos de una red SDN?
+3- Como es conceptualmente la arquitectura SDN?
+4- Como se realiza la comunicacion entre los componentes logicos de la arquitectura?
+5- Que ventajas tiene la implementacion de un red SDN?
+6- Que desventajas tiene la implementacion de una red SDN?
+7- Cual es la funcion principal del controlador en una red SDN?
+8- Cual es la funcion principal de un switch en una red SDN?
+9- Enumerar al menos 5 controladores existentes que se hayan desarrolado.
+10- Enumerar al menos 3 switches que se hayan desarrollado.
+
