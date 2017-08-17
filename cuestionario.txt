@@ -39,9 +39,14 @@
     · Northbound, presenta una API programable para el control de la red y aplicaciones y servicios de alto nivel.
 
 8- Cual es la funcion principal de un switch en una red SDN?
+  Hacer el forwarding de paquetes.
 
 9- Enumerar al menos 5 controladores existentes que se hayan desarrolado.
 
 10- Enumerar al menos 3 switches que se hayan desarrollado.
+  Brocade: NetIron CES 2000.
+  Hewlett Packard: 3500.
+  IBM: RackSwitch G8264.
+
 
 
