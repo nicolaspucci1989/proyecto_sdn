@@ -1,0 +1,30 @@
+#Iniciar wireshar y capturar en loopback 0
+sudo wireshark &
+
+
+#Iniciar mininet con topologia: 1 switch, 1 controlador(de referencia), 4 hosts.
+sudo mn --topo=sigle,4
+
+
+#Iniciar en h4 servidor http
+mininet> sudo h4 python -m SimpleHTTPServer &
+
+
+#Iniciar pedido http de h1 a h4
+mininet> h1 wget 10.0.0.4
+
+
+1- h1 envia syn a swtch
+2- s0 revisa las tablas de flujo locales, no hay entrada es el primer paquete. Es table miss.
+3- s0 envia el paquete a c0(controlador). packet-in. El mensaje original tcp es encapsulado en un paquete OpenFlow. Puede incluir todo el paquete o algunos encabezados y referenciar un buffer-id.
+Si se referencia un buffer-id el switch guarda en buffer el paquete completo, el controlador instruye al swich sobre que acciones se deben tomar referenciando al buffer-id.
+4.1- c0 envia un packet-out. Baja las directivas al switch, le dice que hacer con el paquete. Puede contener el paquete entero o un packet-id.
+4.2- c0 envia un flow-mod (modificacion de las tablas de flujo). Le ordena al switch instalar una nueva entrada en las tablas de flujo.
+  Cualquier pedido en el puerto tcp 80 con la ip y mascara de h1, con destino a la ip y mascara de h4, enviarlos a traves del puerto 4.
+  Macth&Mask
+  Buffer-Id = 250
+  Idle Timeout = 20 #Si no hay mas pedidos http por 20 seg, remover esta entrada.
+  Hard Timeout = 60 #Luego de 60s sin importar si hay o no mas pedidos, remover esta entrada.
+  Action = Fordward port 4
+  Priority = 5000 #Si hay mas de una entrada para un paquete, solo aplicar la de mayor prioridad.
+Es posible realizar una gran cantidad de acciones, ej: cambiar encabezados, ip, mac, puertos tcp. Hacer push, pop o swap de etiquetas MPLS. Hacer un flood a todos los puertos. Descartar el paquete. Enviar los paquetes al controlador o tratarlos como un switch comun.
