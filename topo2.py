@@ -3,7 +3,7 @@
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
-from mininet.log import setLogLevel
+from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
 class SingleSwitchTopo(Topo):
@@ -13,7 +13,7 @@ class SingleSwitchTopo(Topo):
         switch = []
 
         for h in range(5):
-            hosts.append(self.addHost('h%s' % (h + 1)))
+            hosts.append(self.addHost('h%s' % (h + 1), mac='00:00:00:00:00:0%s' % ( h + 1 )))
 
         for s in range(3):
             switch.append(self.addSwitch('s%s' % (s + 1)))
@@ -28,9 +28,14 @@ class SingleSwitchTopo(Topo):
         self.addLink(switch[1], switch[2])
 
 
-topo = SingleSwitchTopo()
-#Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
-net = Mininet(topo, listenPort=6634)
-net.start()
-CLI(net)
-net.stop()
+if __name__ == '__main__':
+    topo = SingleSwitchTopo()
+    #:Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
+    setLogLevel( 'info' )
+    net = Mininet(topo, listenPort=6634)
+    net.start()
+    CLI(net)
+    net.stop()
+
+else:
+    topos = {'mytopo': ( lambda: SingleSwitchTopo() )}
