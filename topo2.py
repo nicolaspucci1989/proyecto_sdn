@@ -30,12 +30,13 @@ class SingleSwitchTopo(Topo):
 
 if __name__ == '__main__':
     topo = SingleSwitchTopo()
-    #:Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
+    # Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
+    # Puerto por defecto 6633
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634)
     net.start()
     CLI(net)
     net.stop()
 
-else:
+else: # Si no es main, es argumento de mn
     topos = {'mytopo': ( lambda: SingleSwitchTopo() )}
