@@ -1,11 +1,9 @@
 #!/usr/bin/python
 from mininet.topo import Topo
 from mininet.net import Mininet
-from mininet.util import dumpNodeConnections
-from mininet.log import setLogLevel, info
+from mininet.log import setLogLevel
 from mininet.cli import CLI
 from mininet.node import Controller
-from functools import partial
 from os import environ
 
 RYUDIR = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas'
