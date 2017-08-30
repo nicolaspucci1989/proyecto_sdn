@@ -42,7 +42,8 @@ class SingleSwitchTopo(Topo):
 
 if __name__ == '__main__':
     topo = SingleSwitchTopo()
-    # Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
+    # Asignar topologia y puerto para acceder con dpctl,
+    # si no usar ovs-ofctl
     # ej, s1 dpctl dump-talbes tcp:127.0.0.1:6634
     # Puerto por defecto 6633
     setLogLevel( 'info' )
