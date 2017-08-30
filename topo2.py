@@ -21,8 +21,8 @@ class SingleSwitchTopo(Topo):
         self.addLink(hosts[0], switch[0])
         self.addLink(hosts[1], switch[0])
         self.addLink(hosts[2], switch[1])
-        self.addLink(hosts[3], switch[1])
         self.addLink(hosts[4], switch[2])
+        self.addLink(hosts[3], switch[1])
 
         self.addLink(switch[0], switch[1])
         self.addLink(switch[1], switch[2])
@@ -31,6 +31,7 @@ class SingleSwitchTopo(Topo):
 if __name__ == '__main__':
     topo = SingleSwitchTopo()
     # Asignar topologia y puerto para acceder con dpctl, si no usar ovs-ofctl
+    # ej, s1 dpctl dump-talbes tcp:127.0.0.1:6634
     # Puerto por defecto 6633
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634)
