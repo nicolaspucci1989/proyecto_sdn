@@ -4,6 +4,19 @@ from mininet.net import Mininet
 from mininet.util import dumpNodeConnections
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
+from mininet.node import Controller
+from functools import partial
+from os import environ
+
+RYUDIR = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas'
+
+class RYU( Controller ):
+    def start(self):
+        self.ryu =  '%s/DumbSwitch.py' % RYUDIR
+        self.cmd('ryu-manager %s &' % self.ryu )
+
+    def stop( self ):
+        self.cmd( 'pkill ryu-manager' )
 
 
 class SingleSwitchTopo(Topo):
@@ -34,7 +47,7 @@ if __name__ == '__main__':
     # ej, s1 dpctl dump-talbes tcp:127.0.0.1:6634
     # Puerto por defecto 6633
     setLogLevel( 'info' )
-    net = Mininet(topo, listenPort=6634)
+    net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
     CLI(net)
     net.stop()
