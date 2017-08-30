@@ -26,7 +26,8 @@ class SingleSwitchTopo(Topo):
         switch = []
 
         for h in range(5):
-            hosts.append(self.addHost('h%s' % (h + 1), mac='00:00:00:00:00:0%s' % ( h + 1 )))
+            hosts.append(self.addHost('h%s' % (h + 1),
+                mac='00:00:00:00:00:0%s' % ( h + 1 )))
 
         for s in range(3):
             switch.append(self.addSwitch('s%s' % (s + 1)))
