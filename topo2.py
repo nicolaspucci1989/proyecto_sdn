@@ -45,8 +45,8 @@ def testSencillo():
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
-    h1 = net.hosts[ 0 ]
-    h2 = net.hosts[ 1 ]
+    #h1 = net.hosts[ 0 ]
+    #h2 = net.hosts[ 1 ]
     s1 = net.get( 's1' )
     #print h1.cmd( 'ping -c3', h2.IP() )
     s1.cmd('dpctl add-flow tcp:127.0.0.1:6634 in_port=1,        actions=output:2' )

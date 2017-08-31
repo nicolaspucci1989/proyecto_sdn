@@ -10,11 +10,15 @@ class L2Switch(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(L2Switch, self).__init__(*args, **kwargs)
 
+    #ofp_event.EventOFPPacketIn
+    #   que evento escuchar
+    #MAIN_DISPATCHER
+    #   despues de la negociacion inicial
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def packet_in_handler(self, ev):
-        msg = ev.msg
-        dp = msg.datapath
-        ofp = dp.ofproto
+        msg = ev.msg #Estructura del packet_in
+        dp = msg.datapath #Estructura que representa el switch
+        ofp = dp.ofproto #Protocolo negociado entre switch y contro
         ofp_parser = dp.ofproto_parser
 
         actions = [ofp_parser.OFPActionOutput(ofp.OFPP_FLOOD)]
