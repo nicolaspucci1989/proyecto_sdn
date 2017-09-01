@@ -42,6 +42,13 @@ class L2Switch(app_manager.RyuApp):
             in_port=puerto_entrada,
             actions=acciones)
         dp.send_msg(out)
+        '''
         self.logger.info("destino %s fuente %s puerto %s dpid %s",
                 destino, fuente, puerto_entrada, dpid)
+        '''
+        if destino == '00:00:00:00:00:01':
+            self.logger.info('destino host 1')
+
+        if destino == '00:00:00:00:00:02':
+            self.logger.info('destino host 2')
 
