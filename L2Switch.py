@@ -23,9 +23,9 @@ class L2Switch(app_manager.RyuApp):
         dp = mensaje.datapath #Estructura que representa el switch
         ofp = dp.ofproto #Protocolo negociado entre switch y contro
         ofp_parser = dp.ofproto_parser
-
         paquete = packet.Packet(mensaje.data)
         eth = paquete.get_protocol(ethernet.ethernet)
+        puerto_entrada = mensaje.in_port
 
         if eth.ethertype == ether_types.ETH_TYPE_LLDP:
             #Ignorar el paquete link layer discovery protocol
@@ -43,5 +43,5 @@ class L2Switch(app_manager.RyuApp):
             actions=actions)
         dp.send_msg(out)
         self.logger.info("destino %s fuente %s puerto %s dpid %s",
-                destino, fuente, mensaje. in_port, dpid)
+                destino, fuente, puerto_entrada, dpid)
 
