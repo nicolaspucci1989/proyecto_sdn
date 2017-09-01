@@ -15,14 +15,16 @@ class L2Switch(app_manager.RyuApp):
     #MAIN_DISPATCHER
     #   despues de la negociacion inicial
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
-    def packet_in_handler(self, ev):
-        msg = ev.msg #Estructura del packet_in
-        dp = msg.datapath #Estructura que representa el switch
+    def packet_in_handleR(self, evento):
+        mensaje = evento.msg #Estructura del packet_in
+        dp = mensaje.datapath #Estructura que representa el switch
         ofp = dp.ofproto #Protocolo negociado entre switch y contro
         ofp_parser = dp.ofproto_parser
 
         actions = [ofp_parser.OFPActionOutput(ofp.OFPP_FLOOD)]
         out = ofp_parser.OFPPacketOut(
-            datapath=dp, buffer_id=msg.buffer_id, in_port=msg.in_port,
+            datapath=dp, buffer_id=mensaje.buffer_id, in_port=mensaje.in_port,
             actions=actions)
         dp.send_msg(out)
+        self.logger.info("Paquete recibido!!")
+
