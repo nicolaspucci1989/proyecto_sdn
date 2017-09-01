@@ -6,11 +6,12 @@ from mininet.cli import CLI
 from mininet.node import Controller
 from os import environ
 
-RYUDIR = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas'
+RYUDIR = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/L2Switch.py'
+RYUEJEMPLOS = environ[ 'HOME' ] + '/ryu/ryu/app/simple_switch.py'
 
 class RYU( Controller ):
     def start(self):
-        self.ryu =  '%s/DumbSwitch.py' % RYUDIR
+        self.ryu =  '%s' % RYUEJEMPLOS
         self.cmd('ryu-manager %s &' % self.ryu )
 
     def stop( self ):
@@ -57,17 +58,16 @@ def testSencillo():
     net.stop()
 
 if __name__ == '__main__':
-    testSencillo()
-    #topo = SingleSwitchTopo()
+    topo = SingleSwitchTopo()
     ## Asignar topologia y puerto para acceder con dpctl,
     ## si no usar ovs-ofctl
     ## ej, s1 dpctl dump-talbes tcp:127.0.0.1:6634
     ## Puerto por defecto 6633
-    #setLogLevel( 'info' )
-    #net = Mininet(topo, listenPort=6634, controller=RYU)
-    #net.start()
-    #CLI(net)
-    #net.stop()
+    setLogLevel( 'info' )
+    net = Mininet(topo, listenPort=6634, controller=RYU)
+    net.start()
+    CLI(net)
+    net.stop()
 
 else: # Si no es main, es argumento de mn
     topos = {'mytopo': ( lambda: SingleSwitchTopo() )}
