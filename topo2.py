@@ -6,12 +6,12 @@ from mininet.cli import CLI
 from mininet.node import Controller
 from os import environ
 
-RYUDIR = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/L2Switch.py'
+L2SWITCH = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/L2Switch.py'
 RYUEJEMPLOS = environ[ 'HOME' ] + '/ryu/ryu/app/simple_switch.py'
 
 class RYU( Controller ):
     def start(self):
-        self.ryu =  '%s' % RYUEJEMPLOS
+        self.ryu =  '%s' % L2SWITCH
         self.cmd('ryu-manager %s &' % self.ryu )
 
     def stop( self ):
