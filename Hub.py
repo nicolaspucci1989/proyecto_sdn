@@ -7,11 +7,11 @@ from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
 
-class L2Switch(app_manager.RyuApp):
+class Hub(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_0.OFP_VERSION]
 
     def __init__(self, *args, **kwargs):
-        super(L2Switch, self).__init__(*args, **kwargs)
+        super(Hub, self).__init__(*args, **kwargs)
 
     #ofp_event.EventOFPPacketIn
     #   que evento escuchar
