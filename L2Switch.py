@@ -37,6 +37,13 @@ class L2Switch(app_manager.RyuApp):
 
 
         acciones = [ofp_parser.OFPActionOutput(ofp.OFPP_FLOOD)]
+        match = ofp_parser.OFPMatch(
+                in_port=1
+                )
+        if 'ipv4_src' in match:
+            print ("hay match")
+            print match['ipv4_src']
+
         out = ofp_parser.OFPPacketOut(
             datapath=dp, buffer_id=mensaje.buffer_id,
             in_port=puerto_entrada,
