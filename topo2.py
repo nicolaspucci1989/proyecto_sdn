@@ -1,4 +1,13 @@
 #!/usr/bin/python
+
+
+'''
+comando para mn con topo custom con controlador mininet
+sudo mn --custom topo2.py --topo mytopo --switch ovsk --controller remote
+iniciar controlador ryu
+ryu-manager L2Switch
+'''
+
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.log import setLogLevel
