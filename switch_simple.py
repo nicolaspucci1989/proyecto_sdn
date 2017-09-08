@@ -2,15 +2,16 @@ from ryu.base import app_manager
 from ryu.controller import ofp_event
 from ryu.controller.handler import MAIN_DISPATCHER, CONFIG_DISPATCHER
 from ryu.controller.handler import set_ev_cls
-from ryu.ofproto import ofproto_v1_0, ofproto_v1_3
+from ryu.ofproto import ofproto_v1_0
+ #from ryu.ofproto import ofproto_v1_3
 
 class SimpleHub(app_manager.RyuApp):
     #En version 1.0, si hay un table miss la accion por defecto es enviarla al controlador
     #En version 1.3, si hay un table miss la accion por defecto es dropearlo
 
 
-    #OFP_VERSIONS = [ofproto_v1_0.OFP_VERSION]
-    OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
+    OFP_VERSIONS = [ofproto_v1_0.OFP_VERSION]
+    #OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
 
     def __init__(self, *args, **kwargs):
@@ -33,11 +34,14 @@ class SimpleHub(app_manager.RyuApp):
     def packet_in_handler(self, ev):
         msg = ev.msg
         print("ev message: ", ev.msg)
+
         datapath = msg.datapath
         ofproto = datapath.ofproto
         ofp_parser = datapath.ofproto_parser
         actions = [ofp_parser.OFPActionOutput(ofproto.OFPP_FLOOD)]
         out = ofp_parser.OFPPacketOut(
-                datapath=datapath, buffer_id=msg.buffer_id, in_port=msg.in_port,
+                datapath=datapath,
+                buffer_id=msg.buffer_id,
+                in_port=msg.in_port,
                 actions=actions)
         datapath.send_msg(out)
