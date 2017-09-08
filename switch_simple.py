@@ -16,13 +16,19 @@ class SimpleHub(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(SimpleHub, self).__init__(*args, **kwargs)
 
-
+    #Decorador del event handler, toma dos argumentos. El primero indica que evento invocara a la
+    #funcion. El segundo indica el estado del switch
+    #En este caso estamos invocando la funcion cuando hay un evento "Switch Features"; CONFIG_DISPATCHER
+    #significa que el switch esta en la fase de negociacion de version y envio del mensaje de
+    #"features-request"
     @set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
     def switch_features_handler(self, ev):
         message = ev.msg
         print("message: ", message)
 
 
+    #MAIN_DISPATCHER indica que la funcion debe ser llamada despues que la negociacion de features
+    #se haya completado
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def packet_in_handler(self, ev):
         msg = ev.msg
