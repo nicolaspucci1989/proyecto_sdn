@@ -37,9 +37,9 @@ class SimpleHub(app_manager.RyuApp):
 
         datapath = msg.datapath
         ofproto = datapath.ofproto
-        ofp_parser = datapath.ofproto_parser
-        actions = [ofp_parser.OFPActionOutput(ofproto.OFPP_FLOOD)]
-        out = ofp_parser.OFPPacketOut(
+        parser = datapath.ofproto_parser
+        actions = [parser.OFPActionOutput(ofproto.OFPP_FLOOD)]
+        out = parser.OFPPacketOut(
                 datapath=datapath,
                 buffer_id=msg.buffer_id,
                 in_port=msg.in_port,
@@ -50,12 +50,13 @@ class SimpleHub(app_manager.RyuApp):
         ofproto = datapath.ofproto
         parser = datapath.ofproto_parser
         inst = [parser.OFPInstructionActions(ofproto.OFPIT_APPLY_ACTIONS,
-            actions)]
+                                            actions)]
         if buffer_id:
             mod = parser.OFPFlowMod(datapath=datapath, buffer_id=buffer_id,
-                    priority=priority, match=match,
-                    instructions=inst)
+                                    priority=priority, match=match,
+                                    instructions=inst)
         else:
             mod = parser.OFPFlowMod(datapath=datapath, priority=priority,
-                    match=match, instructions=inst)
-            datapath.send_msg(mod)
+                                    match=match, instructions=inst)
+
+        datapath.send_msg(mod)
