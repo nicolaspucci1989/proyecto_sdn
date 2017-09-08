@@ -4,7 +4,6 @@ from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet
-import array
 from ryu.lib.packet import ethernet
 from ryu.lib.packet import ether_types
 #from ryu.lib.packet import ipv4, tcp
@@ -46,13 +45,6 @@ class SimpleSwitch13(app_manager.RyuApp):
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
 
-        # Decodificar e imprimir paquete
-        print("msg.data: {}".format(array.array('B', ev.msg.data)))
-        pkt = packet.Packet(ev.msg.data)
-        for p in pkt.protocols:
-            print(p.protocol_name, p)
-            if p.protocol_name == 'ipv4':
-                print('IP: src {} dst {}'.format(p.src, p.dst))
 
         # Below is the original code from simple_switch_13.py
         msg = ev.msg
