@@ -1,4 +1,4 @@
-###Trabajos a realizar
+### Trabajos a realizar
 1. Que el grupo conozca el software y los rudimentos del uso de SDN
 2. Armar maqueta con una red virtual para poder realizar diferentes pruebas. (mininet)
  1. 3 switches en cascada (FETH)
