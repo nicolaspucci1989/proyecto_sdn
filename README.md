@@ -17,18 +17,22 @@
      * Configurar Switches como Switches
      * Configurar Switches como Routers
      * Medir performace de cada configuracion
-
+---
 #### Software Necesario
 1. Sistema operativo Linux.
 2. Mininet.
    Instalacion:
-   ```bash
+   ``` bash
    git clone git://github.com/mininet/mininet
    mininet/util/install.sh -a
    ```
    Test funcionalidad basica:
-   ```bash
+   ``` bash
    sudo mn --test pingall
    ```
 3. Ryu.
-
+ Instalacion:
+ ``` bash
+ git clone git://github.com/osrg/ryu.git
+ cd ryu; python ./setup.py install
+ ```
