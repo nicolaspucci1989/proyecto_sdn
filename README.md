@@ -22,12 +22,12 @@
 1. Sistema operativo Linux.
 2. Mininet.
     Instalacion:
-    ```
+    ```bash
     git clone git://github.com/mininet/mininet
     mininet/util/install.sh -a
     ```
     Test funcionalidad basica:
-    ```
+    ```bash
     sudo mn --test pingall
     ```
 3. Ryu.
