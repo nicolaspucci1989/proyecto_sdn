@@ -6,12 +6,12 @@
     * 1 servidor
     * 1 PC
 3. Correr ejercicios, realizar pruebas y obtener resultados
-    * Prueba de conectividad entre los nodos
+   * Prueba de conectividad entre los nodos
       * Ping
       * Trafico
       * Falla
       * Redundancia
-   - Implementacion de SDN
+   * Implementacion de SDN
      * Uso sin configurar
      * Configurar Switches como HUBS
      * Configurar Switches como Switches
