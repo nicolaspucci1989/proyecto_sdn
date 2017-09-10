@@ -54,7 +54,7 @@ Iniciar controlador
 ryu-manager Hub.py
 ``` 
 Ping entre h1 y h2
-``` bash
+``` mininet
 mininet> h1 ping -c5 h2
 PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=84.5 ms
@@ -68,7 +68,7 @@ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 13.922/28.544/84.521/27.994 ms
 ```
 Prueba con iperf
-``` bash
+``` mininet
 mininet> iperf
 *** Iperf: testing TCP bandwidth between h1 and h5 
 *** Results: ['1.89 Mbits/sec', '2.08 Mbits/sec']
