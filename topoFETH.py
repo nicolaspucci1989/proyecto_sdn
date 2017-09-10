@@ -15,7 +15,8 @@ from mininet.cli import CLI
 from mininet.node import Controller
 from os import environ
 
-L2SWITCH = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/L2Switch.py'
+
+L2SWITCH = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/controladores/switch_simple.py'
 RYUEJEMPLOS = environ[ 'HOME' ] + '/ryu/ryu/app/simple_switch.py'
 
 class RYU( Controller ):
@@ -56,13 +57,18 @@ class TopoFETH(Topo):
         self.addLink(self.swchs[1], self.swchs[2])
 
 
+def testPing(net):
+    setLogLevel( 'info' )
+    h1 = net.hosts[ 0 ]
+    h2 = net.hosts[ 1 ]
+    print h1.cmd('ping -c5', h2.IP())
+
+
 def testSencillo():
     topo = TopoFETH()
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
-    #h1 = net.hosts[ 0 ]
-    #h2 = net.hosts[ 1 ]
     s1 = net.get( 's1' )
     #print h1.cmd( 'ping -c3', h2.IP() )
     s1.cmd('dpctl add-flow tcp:127.0.0.1:6634 in_port=1,actions=output:2' )
@@ -81,8 +87,8 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
-    CLI(net)
+    testPing(net)
+    #CLI(net)
     net.stop()
-
 else: # Si no es main, es argumento de mn
     topos = {'topologia': ( lambda: TopoFETH() )}
