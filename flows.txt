@@ -1,7 +1,0 @@
-#Agregar flujo, de h1 a h2
-s1 dpctl add-flow tcp:127.0.0.1:6634 in_port=1,actions=output:2
-
-#Agregar flujo, de h2 a h1
-s1 dpctl add-flow tcp:127.0.0.1:6634 in_port=2,actions=output:1
-
-
