@@ -86,4 +86,4 @@ if __name__ == '__main__':
     net.stop()
 
 else: # Si no es main, es argumento de mn
-    topos = {'mytopo': ( lambda: SingleSwitchTopo() )}
+    topos = {'topologia': ( lambda: SingleSwitchTopo() )}

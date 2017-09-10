@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo mn --custom topo2.py --topo mytopo --switch ovsk --controller remote
+sudo mn --custom topo2.py --topo topologia --switch ovsk --controller remote
