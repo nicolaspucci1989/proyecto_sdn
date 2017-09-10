@@ -29,8 +29,7 @@ class RYU( Controller ):
         self.cmd( 'pkill ryu-manager' )
 
 
-class SingleSwitchTopo(Topo):
-
+class TopoFETH(Topo):
     def build(self):
         # Listas para hosts y switches
         self.hsts = []
@@ -58,7 +57,7 @@ class SingleSwitchTopo(Topo):
 
 
 def testSencillo():
-    topo = SingleSwitchTopo()
+    topo = TopoFETH()
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
@@ -74,7 +73,7 @@ def testSencillo():
     net.stop()
 
 if __name__ == '__main__':
-    topo = SingleSwitchTopo()
+    topo = TopoFETH()
     ## Asignar topologia y puerto para acceder con dpctl,
     ## si no usar ovs-ofctl
     ## ej, s1 dpctl dump-talbes tcp:127.0.0.1:6634
@@ -86,4 +85,4 @@ if __name__ == '__main__':
     net.stop()
 
 else: # Si no es main, es argumento de mn
-    topos = {'topologia': ( lambda: SingleSwitchTopo() )}
+    topos = {'topologia': ( lambda: TopoFETH() )}
