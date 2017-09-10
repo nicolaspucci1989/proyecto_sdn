@@ -73,3 +73,22 @@ mininet> iperf
 *** Iperf: testing TCP bandwidth between h1 and h5 
 *** Results: ['1.89 Mbits/sec', '2.08 Mbits/sec']
 ```
+## Controlador como switch
+iniciar controlador
+``` bash
+ryu-manager switch_simple.py
+```
+Ping entre h1 y h2
+``` mininet
+mininet> h1 ping -c5 h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=59.1 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=1.10 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=0.229 ms
+64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=0.192 ms
+64 bytes from 10.0.0.2: icmp_seq=5 ttl=64 time=0.190 ms
+
+--- 10.0.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4046ms
+rtt min/avg/max/mdev = 0.190/12.164/59.103/23.472 ms
+```
