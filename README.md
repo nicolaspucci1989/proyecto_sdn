@@ -93,7 +93,7 @@ PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.190/12.164/59.103/23.472 ms
 ```
 Prueba con iperf
-```
+``` mininet
 mininet> iperf
 *** Iperf: testing TCP bandwidth between h1 and h5 
 *** Results: ['1.94 Gbits/sec', '1.94 Gbits/sec']
