@@ -20,9 +20,9 @@ RYUEJEMPLOS = environ[ 'HOME' ] + '/ryu/ryu/app/simple_switch.py'
 
 class RYU( Controller ):
     def start(self):
-        #Asignamos el controlador
+        # Asignamos el controlador
         self.ryu =  '%s' % L2SWITCH
-        #Asignamos el comando necesario para correr el controlador
+        # Asignamos el comando necesario para correr el controlador
         self.cmd('ryu-manager %s &' % self.ryu )
 
     def stop( self ):
@@ -32,27 +32,27 @@ class RYU( Controller ):
 class SingleSwitchTopo(Topo):
 
     def build(self):
-        #Listas para hosts y switches
+        # Listas para hosts y switches
         self.hsts = []
         self.swchs = []
 
-        #Crear los hosts y asignarles una MAC
+        # Crear los hosts y asignarles una MAC
         for h in range(5):
-            self.hsts.append(self.addHost('h%s' % (h + 1),
-                mac='00:00:00:00:00:0%s' % ( h + 1 )))
+            self.hsts.append(self.addHost('h%s' % (h + 1)))
 
-        #Crear switches
+        # Crear switches
         for s in range(3):
-            self.swchs.append(self.addSwitch('s%s' % (s + 1)))
+            self.swchs.append(self.addSwitch('s%s' % (s + 1),
+                                            mac='00:00:00:00:55:0%s' % ( s + 1)))
 
-        #Conectamos los hosts a los switches
+        # Conectamos los hosts a los switches
         self.addLink(self.hsts[0], self.swchs[0])
         self.addLink(self.hsts[1], self.swchs[0])
         self.addLink(self.hsts[2], self.swchs[1])
         self.addLink(self.hsts[3], self.swchs[1])
         self.addLink(self.hsts[4], self.swchs[2])
 
-        #Conectamos los switches entre si
+        # Conectamos los switches entre si
         self.addLink(self.swchs[0], self.swchs[1])
         self.addLink(self.swchs[1], self.swchs[2])
 
