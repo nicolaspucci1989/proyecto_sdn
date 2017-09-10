@@ -36,3 +36,15 @@
  git clone git://github.com/osrg/ryu.git
  cd ryu; python ./setup.py install
  ```
+---
+## Topologia con controlador pasivo
+Iniciar topologia:
+``` bash
+sudo mn --custom topo2.py --topo mytopo --switch ovsk --controller remote
+```
+Iniciar controlador
+``` bash
+ryu-manager controlador_pasivo.py
+```
+El controlador recibe paquetes de los switches pero no realiza ninguna acción.
+
