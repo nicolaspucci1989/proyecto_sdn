@@ -1,6 +1,3 @@
-# Comandos mininet
-s1 dpctl add-flow tcp:127.0.0.1:6634 in_port=1,actions=output:2
-
 # Comandos ovs
 sudo ovs-vsctl list-ports s1
 sudo ovs-ofctl show s1
