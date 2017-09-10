@@ -21,15 +21,15 @@
 ## Software Necesario
 1. Sistema operativo Linux.
 2. Mininet.
-   Instalacion:
-   ``` bash
-   git clone git://github.com/mininet/mininet
-   mininet/util/install.sh -a
-   ```
-   Test funcionalidad basica:
-   ``` bash
-   sudo mn --test pingall
-   ```
+  Instalacion:
+  ``` bash
+  git clone git://github.com/mininet/mininet
+  mininet/util/install.sh -a
+  ```
+  Test funcionalidad basica:
+  ``` bash
+  sudo mn --test pingall
+  ```
 3. Ryu.
  Instalacion:
  ``` bash
@@ -37,7 +37,7 @@
  cd ryu; python ./setup.py install
  ```
 ---
-## Topologia con controlador pasivo
+## Controlador pasivo
 Iniciar topologia:
 ``` bash
 sudo mn --custom topo2.py --topo mytopo --switch ovsk --controller remote
@@ -48,3 +48,22 @@ ryu-manager controlador_pasivo.py
 ```
 El controlador recibe paquetes de los switches pero no realiza ninguna acción.
 
+## Controlador como hub
+Iniciar controlador
+```
+ryu-manager Hub.py
+```
+Ping entre h1 y h2
+```
+mininet> h1 ping -c5 h2
+PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
+64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=19.6 ms
+64 bytes from 10.0.0.2: icmp_seq=2 ttl=64 time=15.3 ms
+64 bytes from 10.0.0.2: icmp_seq=3 ttl=64 time=16.5 ms
+64 bytes from 10.0.0.2: icmp_seq=4 ttl=64 time=11.7 ms
+64 bytes from 10.0.0.2: icmp_seq=5 ttl=64 time=10.9 ms
+
+--- 10.0.0.2 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 10.900/14.824/19.616/3.198 ms
+```
