@@ -1,4 +1,4 @@
-### Trabajos a realizar
+## Trabajos a realizar
 1. Que el grupo conozca el software y los rudimentos del uso de SDN
 2. Armar maqueta con una red virtual para poder realizar diferentes pruebas. (mininet)
    * 3 switches en cascada (FETH)
@@ -18,7 +18,7 @@
      * Configurar Switches como Routers
      * Medir performace de cada configuracion
 ---
-#### Software Necesario
+## Software Necesario
 1. Sistema operativo Linux.
 2. Mininet.
    Instalacion:
