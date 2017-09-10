@@ -50,11 +50,11 @@ El controlador recibe paquetes de los switches pero no realiza ninguna acción.
 
 ## Controlador como hub
 Iniciar controlador
-```
+``` bash
 ryu-manager Hub.py
-```
+``` 
 Ping entre h1 y h2
-```
+``` mininet
 mininet> h1 ping -c5 h2
 PING 10.0.0.2 (10.0.0.2) 56(84) bytes of data.
 64 bytes from 10.0.0.2: icmp_seq=1 ttl=64 time=84.5 ms
