@@ -12,7 +12,7 @@ class Hub( app_manager.RyuApp ):
         super( Hub, self ).__init__( *args, **kwargs )
 
     #ofp_event.EventOFPPacketIn
-    #   que evento escuchar
+    #   que evento escuchar, PacketIn se da cuando hay table miss
     #MAIN_DISPATCHER
     #   despues de la negociacion inicial
     @set_ev_cls( ofp_event.EventOFPPacketIn, MAIN_DISPATCHER )
