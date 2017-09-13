@@ -24,7 +24,7 @@ class Hub( app_manager.RyuApp ):
     #MAIN_DISPATCHER
     #   despues de la negociacion inicial
     @set_ev_cls( ofp_event.EventOFPPacketIn, MAIN_DISPATCHER )
-    def packet_in_handleR( self, evento ):
+    def packet_in_handler( self, evento ):
         self.imprimirProtocolos( evento )
         mensaje = evento.msg #Estructura del packet_in
         dp = mensaje.datapath #Estructura que representa el switch
