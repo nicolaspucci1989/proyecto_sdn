@@ -3,6 +3,8 @@ from ryu.controller import ofp_event
 from ryu.controller.handler import MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_0
+from ryu.lib.packet import packet
+import array
 
 
 class Hub( app_manager.RyuApp ):
@@ -17,6 +19,13 @@ class Hub( app_manager.RyuApp ):
     #   despues de la negociacion inicial
     @set_ev_cls( ofp_event.EventOFPPacketIn, MAIN_DISPATCHER )
     def packet_in_handleR( self, evento ):
+        print( "Datos: {}".format( array.array( 'B', evento.msg.data ) ) )
+        paquete = packet.Packet( evento.msg.data )
+        for p in paquete.protocols:
+            print( p.protocol_name, p)
+            print( "- - - - - - - - - - - - -")
+        print "=================================================================="
+
         mensaje = evento.msg #Estructura del packet_in
         dp = mensaje.datapath #Estructura que representa el switch
         ofp = dp.ofproto #Protocolo negociado entre switch y contro
