@@ -4,15 +4,13 @@
 '''
 comando para mn con topo custom con controlador mininet
 sudo mn --custom topo2.py --topo mytopo --switch ovsk --controller remote
-iniciar controlador ryu
-ryu-manager L2Switch
 '''
 
 from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.log import setLogLevel
-from mininet.cli import CLI
 from mininet.node import Controller
+from mininet.cli import CLI
 from os import environ
 
 
@@ -32,29 +30,19 @@ class RYU( Controller ):
 
 class TopoFETH(Topo):
     def build(self):
-        # Listas para hosts y switches
-        self.hsts = []
-        self.swchs = []
-
         # Crear los hosts y asignarles una MAC
-        for h in range(5):
-            self.hsts.append(self.addHost('h%s' % (h + 1)))
+        h1, h2, h3, h4, h5 = [ self.addHost( h ) for h in ( 'h1', 'h2', 'h3', 'h4', 'h5' ) ]
 
         # Crear switches
-        for s in range(3):
-            self.swchs.append(self.addSwitch('s%s' % (s + 1),
-                                            mac='00:00:00:00:55:0%s' % ( s + 1)))
+        s1, s2, s3 = [ self.addSwitch( s ) for s in ( 's1', 's2', 's3' ) ]
 
         # Conectamos los hosts a los switches
-        self.addLink(self.hsts[0], self.swchs[0])
-        self.addLink(self.hsts[1], self.swchs[0])
-        self.addLink(self.hsts[2], self.swchs[1])
-        self.addLink(self.hsts[3], self.swchs[1])
-        self.addLink(self.hsts[4], self.swchs[2])
+        for h, s in [ (h1, s1), (h2, s1), (h3, s2), (h4, s2), (h5, s3)]:
+            self.addLink( h, s )
 
         # Conectamos los switches entre si
-        self.addLink(self.swchs[0], self.swchs[1])
-        self.addLink(self.swchs[1], self.swchs[2])
+        for x, y in [ (s1, s2), (s2, s3) ]:
+            self.addLink( x, y )
 
 
 if __name__ == '__main__':
@@ -66,8 +54,7 @@ if __name__ == '__main__':
     setLogLevel( 'info' )
     net = Mininet(topo, listenPort=6634, controller=RYU)
     net.start()
-    testPing(net)
-    #CLI(net)
+    CLI(net)
     net.stop()
 else: # Si no es main, es argumento de mn
     topos = {'topologia': ( lambda: TopoFETH() )}
