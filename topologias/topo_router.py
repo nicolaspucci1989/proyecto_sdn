@@ -94,3 +94,5 @@ def run():
 if __name__ == '__main__':
     setLogLevel( 'info' )
     run()
+else:
+    topos = { 'topologia': ( lambda: Topologia() ) }
