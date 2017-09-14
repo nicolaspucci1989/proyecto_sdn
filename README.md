@@ -100,3 +100,13 @@ mininet> iperf
 ```
 ## Router
 Se utiliza un nodo como router habilitando el forwarding IP. Se usan los switches de referencia.
+
+## Sevidor HTTP
+Iniciar servidor en host 5
+```
+h5 python -m SimpleHTTPServer &
+```
+Realizar un pedido
+```
+h1 wget http://10.0.0.5:8000
+```
