@@ -32,8 +32,11 @@ class Hub_1_3( app_manager.RyuApp ):
     def imprimirProtocolos( self, evento):
         paquete = packet.Packet( evento.msg.data )
         for p in paquete.protocols:
-            print( p.protocol_name, p)
-            print( "- - - - - - - - - - - - -")
+            if p.protocol_name == 'ipv6':
+                pass
+            else:
+                print( p.protocol_name, p)
+                print( "- - - - - - - - - - - - -")
         print "=================================================================="
 
     #ofp_event.EventOFPPacketIn
