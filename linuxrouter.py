@@ -52,13 +52,13 @@ class NetworkTopo( Topo ):
 
     def build( self, **_opts ):
 
-        defaultIP = '192.168.1.1/24'  # IP address for r0-eth1
+        defaultIP = '192.168.1.1/24'  # dir IP para r0-eth1
         router = self.addNode( 'r0', cls=RouterSimple, ip=defaultIP )
 
         s1, s2, s3, = [ self.addSwitch( s ) for s in ( 's1', 's2', 's3' ) ]
 
         self.addLink( s1, router, intfName2='r0-eth1',
-                      params2={ 'ip' : defaultIP } )  # for clarity
+                      params2={ 'ip' : defaultIP } )
         self.addLink( s2, router, intfName2='r0-eth2',
                       params2={ 'ip' : '172.16.0.1/12' } )
         self.addLink( s3, router, intfName2='r0-eth3',
@@ -82,7 +82,7 @@ class NetworkTopo( Topo ):
 def run():
     "Test con router"
     topo = NetworkTopo()
-    net = Mininet( topo=topo )  # controller is used by s1-s3
+    net = Mininet( topo=topo )
     net.start()
     info( '*** Tabla de rutas:\n' )
     info( net[ 'r0' ].cmd( 'route' ) )
