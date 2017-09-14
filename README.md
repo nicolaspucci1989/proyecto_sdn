@@ -98,3 +98,5 @@ mininet> iperf
 *** Iperf: testing TCP bandwidth between h1 and h5 
 *** Results: ['1.94 Gbits/sec', '1.94 Gbits/sec']
 ```
+## Router
+Se utiliza un nodo como router habilitando el forwarding IP. Se usan los switches de referencia.
