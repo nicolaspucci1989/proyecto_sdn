@@ -14,8 +14,10 @@ Las dos primeras subredes consisten en dos host conectados
 a un switch
 
     r0-eth1 - s1-eth1 - h1-eth0 (IP: 192.168.1.100)
-    r0-eth2 - s2-eth1 - h2-eth0 (IP: 172.16.0.100)
-    r0-eth3 - s3-eth1 - h3-eth0 (IP: 10.0.0.100)
+    r0-eth1 - s1-eth2 - h2-eth0 (IP: 192.168.1.200)
+    r0-eth2 - s2-eth3 - h3-eth0 (IP: 172.16.0.100)
+    r0-eth2 - s2-eth4 - h4-eth0 (IP: 172.16.0.200)
+    r0-eth3 - s3-eth5 - h5-eth0 (IP: 10.0.0.100)
 
 El ejemplo se basa en las entradas de rutas que se crean
 automaticamente para cada interface del router, de la
