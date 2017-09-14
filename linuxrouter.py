@@ -49,7 +49,7 @@ class RouterSimple( Node ):
         super( RouterSimple, self ).terminate()
 
 
-class NetworkTopo( Topo ):
+class Topologia( Topo ):
     "El router conecta tres subredes"
 
     def build( self, **_opts ):
@@ -83,7 +83,7 @@ class NetworkTopo( Topo ):
 
 def run():
     "Test con router"
-    topo = NetworkTopo()
+    topo = Topologia()
     net = Mininet( topo=topo )
     net.start()
     info( '*** Tabla de rutas:\n' )
