@@ -13,9 +13,7 @@ from mininet.node import Controller
 from mininet.cli import CLI
 from os import environ
 
-
 L2SWITCH = environ[ 'HOME' ] + '/Documents/UNSAM/proyecto/sdn/notas/controladores/switch_simple.py'
-RYUEJEMPLOS = environ[ 'HOME' ] + '/ryu/ryu/app/simple_switch.py'
 
 class RYU( Controller ):
     def start(self):
