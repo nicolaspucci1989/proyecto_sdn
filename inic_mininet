@@ -1,2 +1,2 @@
 #!/bin/bash
-mn --custom topoFETH.py --topo topologia --switch ovsk --controller remote
+mn --custom topologias/topoFETH.py --topo topologia --switch ovsk --controller remote
