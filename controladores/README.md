@@ -11,3 +11,8 @@
  * Cuando el switch envia un mensaje Packet-In.
    * Se agrega una entrada a la tabla MAC-puerto que asigna la MAC origen al puerto que recibe.
    * Se busca la MAC destino el la tabla MAC-puerto
+     * Si no se encuentra se fija el puerto destino como FLOOD.
+     * Si se encuentra.
+       * Se fija el puerto destino al puerto asociado con la direccion MAC.
+       * Se agrega un flujo al switch (con una prioridad mas alta que el catch-all) que esta asociada al puerto de entrada y a la direccion MAC. Esto previene la llegada de mensajes Packet-In adicionales al controlador para el mismo puerto y para la misma direccion MAC de destino, pero permite al controlador aprender mas direcciones MAC si el paquete llega al mismo puerto pero con una direccion MAC de destino distinta.
+    * Se envia una mensaje PacketOut al switch indicandole que envie el paquete actual al puerto encontrado en la tabla o realizar un flood.
