@@ -27,3 +27,25 @@ class SimpleSwitch13(app_manager.RyuApp):
         super(SimpleSwitch13, self).__init__(*args, **kwargs)
         self.mac_to_port = {}
 ```
+
+## Manejador de eventos para switches nuevos
+Se define un metodo y se lo registra para que escuche cualquier evento del tipo `ryu.controller.ofp_event.EventOFPSwitchFeatures`. El principal proposito de esta seccion es que se ejecute siempre que se agrega un switch al controlador y se instala un flujo catch-all, lo que permite al switch enviar paquetes al controlador.
+``` python
+@set_ev_cls(ofp_event.EventOFPSwitchFeatures, CONFIG_DISPATCHER)
+def switch_features_handler(self, ev):
+    datapath = ev.msg.datapath
+    ofproto = datapath.ofproto
+    parser = datapath.ofproto_parser
+
+    # install table-miss flow entry
+    #
+    # We specify NO BUFFER to max_len of the output action due to
+    # OVS bug. At this moment, if we specify a lesser number, e.g.,
+    # 128, OVS will send Packet-In with invalid buffer_id and
+    # truncated packet data. In that case, we cannot output packets
+    # correctly.  The bug has been fixed in OVS v2.1.0.
+    match = parser.OFPMatch()
+    actions = [parser.OFPActionOutput(ofproto.OFPP_CONTROLLER,
+                                      ofproto.OFPCML_NO_BUFFER)]
+    self.add_flow(datapath, 0, match, actions)
+```
