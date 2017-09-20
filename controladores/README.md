@@ -16,3 +16,5 @@
        * Se fija el puerto destino al puerto asociado con la direccion MAC.
        * Se agrega un flujo al switch (con una prioridad mas alta que el catch-all) que esta asociada al puerto de entrada y a la direccion MAC. Esto previene la llegada de mensajes Packet-In adicionales al controlador para el mismo puerto y para la misma direccion MAC de destino, pero permite al controlador aprender mas direcciones MAC si el paquete llega al mismo puerto pero con una direccion MAC de destino distinta.
     * Se envia una mensaje PacketOut al switch indicandole que envie el paquete actual al puerto encontrado en la tabla o realizar un flood.
+
+## Registro e inicializacion de la aplicacion
