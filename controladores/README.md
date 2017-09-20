@@ -18,3 +18,12 @@
     * Se envia una mensaje PacketOut al switch indicandole que envie el paquete actual al puerto encontrado en la tabla o realizar un flood.
 
 ## Registro e inicializacion de la aplicacion
+La primera seccion crea la aplicacion de ryu, especifica que version del protocolo OpenFlow con la que es compatible el controlador, e inicializa la tabla MAC-puerto.
+``` python
+class SimpleSwitch13(app_manager.RyuApp):
+    OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
+
+    def __init__(self, *args, **kwargs):
+        super(SimpleSwitch13, self).__init__(*args, **kwargs)
+        self.mac_to_port = {}
+```
