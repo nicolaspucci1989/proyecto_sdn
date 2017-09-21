@@ -49,3 +49,14 @@ def switch_features_handler(self, ev):
                                       ofproto.OFPCML_NO_BUFFER)]
     self.add_flow(datapath, 0, match, actions)
 ```
+## Aprender la direccion MAC y el puerto asociado
+Si no existe se crea la tabla MAC-puerto para el DPID del switch actual. Se loggea la informacion y se actualiza la tabla MAC-puerto con la direccion fuente del paquete asociado y el puerto al cual llego.
+``` python
+dpid = datapath.id
+self.mac_to_port.setdefault(dpid, {})
+
+self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
+
+# Aprender la direccion mac para evitar el FLOOD
+self.mac_to_port[dpid][src] = in_port
+```
