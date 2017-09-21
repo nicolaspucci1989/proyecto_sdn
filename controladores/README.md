@@ -60,3 +60,13 @@ self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 # Aprender la direccion mac para evitar el FLOOD
 self.mac_to_port[dpid][src] = in_port
 ```
+## Busqueda MAC-puerto y destino del paquete
+Se checkea la tabla MAC-puerto asociada al switch para comprobar si ya se aprendio la direccion MAC. Si ese es el caso, se setea el puerto de salida al puerto aprendido, en caso contrario se setea a flood.
+``` python
+if dst in self.mac_to_port[dpid]:
+    out_port = self.mac_to_port[dpid][dst]
+else:
+    out_port = ofproto.OFPP_FLOOD
+
+actions = [parser.OFPActionOutput(out_port)]
+```
