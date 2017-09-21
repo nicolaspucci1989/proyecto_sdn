@@ -60,6 +60,7 @@ self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 # Aprender la direccion mac para evitar el FLOOD
 self.mac_to_port[dpid][src] = in_port
 ```
+
 ## Busqueda MAC-puerto y destino del paquete
 Se checkea la tabla MAC-puerto asociada al switch para comprobar si ya se aprendio la direccion MAC. Si ese es el caso, se setea el puerto de salida al puerto aprendido, en caso contrario se setea a flood.
 ``` python
@@ -69,4 +70,19 @@ else:
     out_port = ofproto.OFPP_FLOOD
 
 actions = [parser.OFPActionOutput(out_port)]
+```
+
+## Agregar una entrada de flujo para el destino aprendido
+Si se encontrol a direccion mac en la tabla MAC-puerto, se agrega un flujo al switch para asegurarse que los proximos paquetes del mismo puerto a la misma direccion sean enviados sin intervension del controlador.
+``` python
+# instalar flujo para evitar proximos packet_in
+if out_port != ofproto.OFPP_FLOOD:
+    match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
+    # verificar si hay un buffer_id valido, si es valido evitar enviar
+    # ambos flow_mod & packet_out
+    if msg.buffer_id != ofproto.OFP_NO_BUFFER:
+        self.add_flow(datapath, 1, match, actions, msg.buffer_id)
+        return
+    else:
+        self.add_flow(datapath, 1, match, actions)
 ```
