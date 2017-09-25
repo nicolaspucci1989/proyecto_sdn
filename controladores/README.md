@@ -86,3 +86,15 @@ if out_port != ofproto.OFPP_FLOOD:
     else:
         self.add_flow(datapath, 1, match, actions)
 ```
+
+## Forwardear el paquete enviado al controlador
+Una vez seteado el destino se le indica al switch que envie el paqeute que fue recibido por el controlador asi el paquete no se pierde durante el proceso de aprendizaje.
+``` python
+data = None
+if msg.buffer_id == ofproto.OFP_NO_BUFFER:
+    data = msg.data
+
+out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id,
+                          in_port=in_port, actions=actions, data=data)
+datapath.send_msg(out)
+```
