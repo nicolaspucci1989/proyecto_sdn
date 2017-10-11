@@ -44,3 +44,49 @@ mybridge  Link encap:Ethernet  HWaddr aa:f8:c3:5c:2e:4c
           RX bytes:0 (0.0 B)  TX bytes:258 (258.0 B)
 ```
 Podemos ver la interface ``mybridge``. Si deseamos eliminar la interface: ```ovs-vsctl del-br mybridge```
+
+El siguiente diagrama demuestra el estado de nuestro entorno.
+![alt text](estado_con_switch.png "Estado con switch")
+El switch esta aislado, no esta conectado a ningún lado solo al stack IP local. eth0 todavía no esta conectado directamente al switch. Aún no ha cambiado nada, si deseamos realizar una conección con el exterior seguiria saliendo por eth0 de forma directa. Mas adelante conectaremos eth0 a mybridge.
+Para conectar eth0 a mybridge:
+``` bash
+ovs-vsctl add-port mybridge eth0
+```
+Verificamos
+``` bash
+ovs-vsctl show
+Bridge mybridge
+  Port mybridge
+    Interface mybridge
+      type: internal
+  Port "ens32"
+    interface "ens32"
+```
+Perdimos conectividad con internet.
+Con el comando ``ovs-vsctl add port mybridge eth0`` redirigimos eth0 para que este conectado con mybridge. Pero estamos tratando de salir por eth0 directamente. Ahora debemos pasar por el switch para salir. Para solucionar esto:
+![alt text](estado_03.png "Estado 03")
+
+Eliminar la direccion IP de eth0 y asignar DHCP
+```
+ifconfig eth0 0
+dhclient mybridge
+```
+Verificamos con ``ifconfig`` la asignacio IP  de mybridge:
+```
+mybridge  Link encap:Ethernet  HWaddr 00:0c:29:b3:b0:05
+          inet addr:192.168.1.101  Bcast:192.168.1.255  Mask:255.255.255.0
+          inet6 addr: fe80::a8f8:c3ff:fe5c:2e4c/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:524 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:107 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1
+          RX bytes:104203 (104.2 KB)  TX bytes:13940 (13.9 KB)
+```
+Comprobamos las rutas con ``route -n``
+```
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         192.168.1.1     0.0.0.0         UG    0      0        0 mybridge
+192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 mybridge
+```
+Observamos que tenemos una ruta via el puerto mybridge. El ping ahora debería ser exitoso.
