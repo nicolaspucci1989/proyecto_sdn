@@ -261,3 +261,8 @@ rtt min/avg/max/mdev = 0.053/0.097/0.266/0.084 ms
 ```
 ### Resultado
 Obtenemos la emulación de dos hosts conectados por Open vSwitch.
+
+# Componentes principales
+## VSWITCHD
+Es un modulo de kernel.
+Si hay un match en cache del modulo al llegar un paquete se toman las acciones en cache. Si no hay un match en el modulo se envia el paquete a __VSWITCHD__ en espacio de usuario. Los paquetes futuros que tengan un match haran un camino más rápido a traves del cache del modulo.
