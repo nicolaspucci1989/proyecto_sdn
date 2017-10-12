@@ -263,6 +263,18 @@ rtt min/avg/max/mdev = 0.053/0.097/0.266/0.084 ms
 Obtenemos la emulación de dos hosts conectados por Open vSwitch.
 
 # Componentes principales
-## VSWITCHD
-Es un modulo de kernel.
+![alt text](img/ovs01.png "arquitectura")
+## OVSDB-SERVER
+Contiene la base de datos de configuración. Esta información permanecera luego de un reboot. Es la configuración de puentres e interfaces etc.
+## OVS-VSWITCHD
+Componente principal de OVS. Realiza todo el manejo de flujos.
 Si hay un match en cache del modulo al llegar un paquete se toman las acciones en cache. Si no hay un match en el modulo se envia el paquete a __VSWITCHD__ en espacio de usuario. Los paquetes futuros que tengan un match haran un camino más rápido a traves del cache del modulo.
+## OVS Kernel Module
+Es un cache del tráfico reciente. El objetivo es mejorar la performance.
+# Configuration database
+Contiene la configuracion del switch: crear puentes, unir tales interfaces al puente, crear tuneles y unirlos al puente. Esta configuración es escrita a disco. Su implementación esta basada en logs, no solo almacena el estado de la base de datos, tiene todos los cambios que ocurrieron en la base de datos, útil para el debug. El protocolo del server ovs es __OVSDB__.
+## Tablas principales
+![alt text](img/ovs02.png "tablas principales")
+Se muestran las tablas principales. Cada vez que se crea una interface o puerto se añade una entrada a la base de datos
+### ovs-vsctl
+Es una interface de alto nivel para la base de datos.
