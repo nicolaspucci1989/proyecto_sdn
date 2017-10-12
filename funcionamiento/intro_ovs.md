@@ -16,7 +16,7 @@ OVS soporta las siguentes características:
 ### Demostración.
 #### Estado inicial
 eth0 obtiene su ip y default gateway por DHCP.
-![alt text](estado_inicial.png "Estado inicial")
+![alt text](img/estado_inicial.png "Estado inicial")
 
 Creamos un switch virtual.
 ``` bash
@@ -46,7 +46,7 @@ mybridge  Link encap:Ethernet  HWaddr aa:f8:c3:5c:2e:4c
 Podemos ver la interface ``mybridge``. Si deseamos eliminar la interface: ```ovs-vsctl del-br mybridge```
 
 El siguiente diagrama demuestra el estado de nuestro entorno.
-![alt text](estado_con_switch.png "Estado con switch")
+![alt text](img/estado_con_switch.png "Estado con switch")
 El switch esta aislado, no esta conectado a ningún lado solo al stack IP local. eth0 todavía no esta conectado directamente al switch. Aún no ha cambiado nada, si deseamos realizar una conección con el exterior seguiria saliendo por eth0 de forma directa. Mas adelante conectaremos eth0 a mybridge.
 Para conectar eth0 a mybridge:
 ``` bash
@@ -64,7 +64,7 @@ Bridge mybridge
 ```
 Perdimos conectividad con internet.
 Con el comando ``ovs-vsctl add port mybridge eth0`` redirigimos eth0 para que este conectado con mybridge. Pero estamos tratando de salir por eth0 directamente. Ahora debemos pasar por el switch para salir. Para solucionar esto:
-![alt text](estado_03.png "Estado 03")
+![alt text](img/estado_03.png "Estado 03")
 
 Eliminar la direccion IP de eth0 y asignar DHCP
 ```
