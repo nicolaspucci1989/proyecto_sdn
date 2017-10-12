@@ -278,3 +278,6 @@ Contiene la configuracion del switch: crear puentes, unir tales interfaces al pu
 Se muestran las tablas principales. Cada vez que se crea una interface o puerto se añade una entrada a la base de datos
 ### ovs-vsctl
 Es una interface de alto nivel para la base de datos.
+### Linux bridge
+En linux bridge el paquete nunca sale del kernel
+En ovs el kernel es mas cencillo y pequeño, es msa facil portar.
