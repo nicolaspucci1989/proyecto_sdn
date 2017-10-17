@@ -16,7 +16,7 @@ sudo apt-get install -y  graphviz \
                          python-zopeinterface
 ```
 2. Comprobar dependencias con ```dpkg-checkbuilddeps```. No devuelve nada si no hubo errores.
-3. Ejecutamos Serial build con unit tests.
+3. Ejecutamos Serial build con unit tests para generar los .deb, 5 a 10 min.
 ``` bash
 fakeroot debian/rules binary
 ```
