@@ -1,7 +1,8 @@
 1. Adquirir y descomprimir tar
-``` bash
-wget http://openvswitch.org/releases/openvswitch-2.8.1.tar.gz
+``` 
+wget http://openvswitch.org/releases/openvswitch-2.5.4.tar.gz
 tar xvzf openvswitch-2.5.4.tar.gz
+cd openvswitch-2.5.4
 ```
 2. Instalar dependencias listadas en debian/config
 ``` bash
