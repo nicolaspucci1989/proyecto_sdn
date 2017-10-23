@@ -1,3 +1,6 @@
+# Comportamiento tradicional como L2SWITCH:
+#   ovs-ofctl add-flow OVS1 actions=NORMAL
+
 # crear namespaces
 ip netns add red
 ip netns add green
